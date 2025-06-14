@@ -6,8 +6,7 @@ import { StoreContext } from "../StoreContext";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const PostReviewPage = () => {
-  const url = "http://localhost:2000";
-  const { token } = useContext(StoreContext);
+  const { token,apiUrl } = useContext(StoreContext);
   const navigate = useNavigate(); // Initialize useNavigate
 
   const [data, setData] = useState({
@@ -92,7 +91,7 @@ const PostReviewPage = () => {
     });
 
     try {
-      const res = await axios.post(url + "/review", formData, {
+      const res = await axios.post(`${apiUrl}/review`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
