@@ -9,7 +9,7 @@ const StoreContextProvider = (props) => {
 	const [token, setToken] = useState("");
 	const [loggedInUser, setLoggedInUser] = useState(null);
 	const [review_list, setreview_list] = useState([]);
-	const apiUrl = "http://localhost:2000";
+	const apiUrl = "https://stay-story-server.onrender.com";
 
 	useEffect(() => {
 		if (token) {
