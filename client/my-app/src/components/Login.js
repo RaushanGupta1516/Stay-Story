@@ -2,13 +2,13 @@ import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { StoreContext } from "../StoreContext";
-import { GoogleLogin } from "@react-oauth/google";
-import Icon from "./icon";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
-import './Login.css';
+import "./Login.css";
 
 const Login = ({ setshowLogin }) => {
-  const { setToken, getUserData,apiUrl } = useContext(StoreContext);
+  const { setToken, getUserData, apiUrl } = useContext(StoreContext);
   const [page, setPage] = useState("Sign up");
   const [data, setdata] = useState({
     name: "",
@@ -29,12 +29,9 @@ const Login = ({ setshowLogin }) => {
       const res = await axios.post(apiUrl + endpoint, data);
       if (res.data.success) {
         const token = res.data.token;
-
         setToken(token);
         localStorage.setItem("token", token);
-
         await getUserData(token);
-
         setshowLogin(false);
         toast.success("Logged in successfully");
       } else {
@@ -47,18 +44,21 @@ const Login = ({ setshowLogin }) => {
 
   const googleSuccess = async (credentialResponse) => {
     try {
+      const tokenId = credentialResponse.credential;
+      const decoded = jwtDecode(tokenId);
+
+
       const res = await axios.post(`${apiUrl}/user/google-login`, {
-        token: credentialResponse.credential,
+        token: tokenId,
+        name: decoded.name,
+        email: decoded.email,
       });
 
       if (res.data.success) {
         const token = res.data.token;
-
         setToken(token);
         localStorage.setItem("token", token);
-
         await getUserData(token);
-
         setshowLogin(false);
         toast.success("Logged in with Google!");
       } else {
@@ -75,74 +75,72 @@ const Login = ({ setshowLogin }) => {
   };
 
   return (
-    <div className="login-overlay">
-      <div className="login-container">
-        <button onClick={() => setshowLogin(false)} className="close-btn">⨯</button>
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+      <div className="login-overlay">
+        <div className="login-container">
+          <button onClick={() => setshowLogin(false)} className="close-btn">⨯</button>
 
-        <h2 className="login-title">{page}</h2>
-        <form onSubmit={handleSubmit} className="login-form">
-          {page === "Sign up" && (
+          <h2 className="login-title">{page}</h2>
+          <form onSubmit={handleSubmit} className="login-form">
+            {page === "Sign up" && (
+              <input
+                onChange={handleOnchange}
+                type="text"
+                name="name"
+                value={data.name}
+                placeholder="Username"
+                required
+                className="input-field"
+              />
+            )}
             <input
               onChange={handleOnchange}
-              type="text"
-              name="name"
-              value={data.name}
-              placeholder="Username"
+              type="email"
+              name="email"
+              value={data.email}
+              placeholder="Email address"
               required
               className="input-field"
             />
-          )}
-          <input
-            onChange={handleOnchange}
-            type="email"
-            name="email"
-            value={data.email}
-            placeholder="Email address"
-            required
-            className="input-field"
-          />
-          <input
-            onChange={handleOnchange}
-            type="password"
-            name="password"
-            value={data.password}
-            placeholder="Password"
-            required
-            className="input-field"
-          />
-          <button type="submit" className="login-btn">
-            {page === "Sign up" ? "Create Account" : "Login now"}
-          </button>
+            <input
+              onChange={handleOnchange}
+              type="password"
+              name="password"
+              value={data.password}
+              placeholder="Password"
+              required
+              className="input-field"
+            />
+            <button type="submit" className="login-btn">
+              {page === "Sign up" ? "Create Account" : "Login now"}
+            </button>
 
-          <GoogleLogin
-            onSuccess={googleSuccess}
-            onError={googleFailure}
-          />
+            <div className="google-login-container">
+              <GoogleLogin onSuccess={googleSuccess} onError={googleFailure} />
+            </div>
 
-          <div className="terms-container">
-            <input type="checkbox" required className="checkbox" />
-            <p>Agree to the terms of use & privacy policy.</p>
-          </div>
-          <p className="toggle-text">
-            {page === "Sign up" ? (
-              <>
-                Already have an account?{" "}
-                <span className="toggle-link" onClick={() => setPage("Login")}>
-                  Login here
-                </span>
-              </>
-            ) : (
-              <>
-                Create an Account?{" "}
-                <span className="toggle-link" onClick={() => setPage("Sign up")}>
-                  Click here
-                </span>
-              </>
-            )}
-          </p>
-        </form>
+            <div className="terms-container">
+              <input type="checkbox" required className="checkbox" />
+              <p>Agree to the terms of use & privacy policy.</p>
+            </div>
+
+            <p className="toggle-text">
+              {page === "Sign up" ? (
+                <>
+                  Already have an account?{" "}
+                  <span className="toggle-link" onClick={() => setPage("Login")}>Login here</span>
+                </>
+              ) : (
+                <>
+                  Create an Account?{" "}
+                  <span className="toggle-link" onClick={() => setPage("Sign up")}>Click here</span>
+                </>
+              )}
+            </p>
+          </form>
+        </div>
       </div>
-    </div>
+    </GoogleOAuthProvider>
   );
 };
 

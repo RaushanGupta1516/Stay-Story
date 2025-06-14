@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import Reviewcard from "./Reviewcard";
 import "./Search.css"; // Ensure this CSS file exists and is linked
 import { StoreContext } from "../StoreContext";
+import { useContext } from "react";
+import React from "react";
+
 const Search = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [reviews, setReviews] = useState([]);
@@ -24,7 +27,7 @@ const Search = () => {
             setIsSearching(false);
             setCurrentPage(1); // Reset to first page on new fetch
 
-            const res = await fetch(`${apiurl}/review`);
+            const res = await fetch(`${apiUrl}/review`);
             const data = await res.json();
 
             if (data.success) {

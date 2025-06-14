@@ -37,7 +37,7 @@ const ReviewDetailPage = () => {
 
   const fetchReview = async () => {
     try {
-      const response = await axios.get(``${apiUrl}/review/${id}`);
+      const response = await axios.get(`${apiUrl}/review/${id}`);
       setReview(response.data);
     } catch (error) {
       console.error("Error fetching review details:", error);

@@ -4,7 +4,7 @@ import { StoreContext } from "../StoreContext";
 import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import menu from "../icons/menu.png"; 
-import logo from "../icons/logo.png";
+
 
 
 const Nav = ({ setshowLogin }) => {
@@ -34,7 +34,7 @@ const Nav = ({ setshowLogin }) => {
         <div className="navbox">
             {/* Logo - Wrapped with Link */}
             <Link to="/" onClick={() => setMenuOpen(false)}> {/* Add Link here */}
-                <img src={logo} alt="logo icon" className="logo-icon" />
+                <img src="finalLogo.png" alt="logo icon" className="logo-icon" />
             </Link>
 
             {/* Center Navigation */}

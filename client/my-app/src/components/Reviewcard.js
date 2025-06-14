@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import "./Reviewcard.css";
 import locationIcon from "../icons/619.png";
+import { useContext } from "react";
+
 import { StoreContext } from "../StoreContext";
 
 const Reviewcard = ({
@@ -79,9 +81,9 @@ const Reviewcard = ({
 
   const getImageUrl = (img) => {
     if (typeof img === "string") {
-      return img.startsWith("http") ? img : `${baseUrl}/${img.replace(/\\/g, "/")}`;
+      return img.startsWith("http") ? img : `${apiUrl}/${img.replace(/\\/g, "/")}`;
     } else if (typeof img === "object" && img?.url) {
-      return img.url.startsWith("http") ? img.url : `${baseUrl}/${img.url.replace(/\\/g, "/")}`;
+      return img.url.startsWith("http") ? img.url : `${apiUrl}/${img.url.replace(/\\/g, "/")}`;
     }
     return "https://via.placeholder.com/400x200?text=No+Image";
   };

@@ -16,7 +16,7 @@ const CommentSection = ({ reviewId }) => {
 		const fetchComments = async () => {
 			try {
 				const res = await axios.get(`${apiUrl}/review/${reviewId}/comments`);
-				setComments(res.data.comments);
+				setComments(res.data.comments.reverse()); // Reverse to show latest comments first
 			} catch (err) {
 				console.error("Failed to fetch comments", err);
 			}
