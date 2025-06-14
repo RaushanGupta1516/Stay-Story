@@ -22,6 +22,7 @@ const Reviewcard = ({
   const [isLiking, setIsLiking] = useState(false);
   const [userId, setUserId] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+   const { apiUrl } = useContext(StoreContext);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -48,7 +49,7 @@ const Reviewcard = ({
     setIsLiking(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/review/like/${id}`,
+        `${apiUrl}/review/like/${id}`,
         {
           method: "POST",
           headers: {
@@ -74,8 +75,6 @@ const Reviewcard = ({
       setIsLiking(false);
     }
   };
-
-  const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:2000";
 
   const getImageUrl = (img) => {
     if (typeof img === "string") {
