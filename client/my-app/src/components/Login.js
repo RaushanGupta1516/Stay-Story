@@ -8,8 +8,7 @@ import Icon from "./icon";
 import './Login.css';
 
 const Login = ({ setshowLogin }) => {
-  const apiUrl = "http://localhost:2000";
-  const { setToken, getUserData } = useContext(StoreContext);
+  const { setToken, getUserData,apiUrl } = useContext(StoreContext);
   const [page, setPage] = useState("Sign up");
   const [data, setdata] = useState({
     name: "",
