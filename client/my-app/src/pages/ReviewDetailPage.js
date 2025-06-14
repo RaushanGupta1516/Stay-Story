@@ -31,13 +31,13 @@ const ReviewDetailPage = () => {
   const [review, setReview] = useState(null);
   const [similarReviews, setSimilarReviews] = useState([]);
   const [visibleCount, setVisibleCount] = useState(3);
-  const { user, token } = useContext(StoreContext);
+  const { user, token,apiUrl } = useContext(StoreContext);
   const fileInputRef = useRef();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const fetchReview = async () => {
     try {
-      const response = await axios.get(`http://localhost:2000/review/${id}`);
+      const response = await axios.get(``${apiUrl}/review/${id}`);
       setReview(response.data);
     } catch (error) {
       console.error("Error fetching review details:", error);
@@ -46,7 +46,7 @@ const ReviewDetailPage = () => {
 
   const fetchSimilarReviews = async () => {
     try {
-      const res = await axios.get(`http://localhost:2000/review/${id}/similar`);
+      const res = await axios.get(`${apiUrl}/review/${id}/similar`);
       setSimilarReviews(res.data.similarReviews || []);
     } catch (error) {
       console.error("Error fetching similar reviews:", error);
@@ -76,7 +76,7 @@ const ReviewDetailPage = () => {
 
     try {
       const res = await axios.post(
-        `http://localhost:2000/review/${id}/images`,
+        `${apiUrl}/review/${id}/images`,
         formData,
         {
           headers: {
@@ -103,7 +103,7 @@ const ReviewDetailPage = () => {
 
   const handleDelete = async () => {
     try {
-      const res = await axios.delete(`http://localhost:2000/review/${id}`, {
+      const res = await axios.delete(`${apiUrl}/review/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.data.success) {
