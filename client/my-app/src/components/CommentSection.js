@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import "./CommentSection.css";
 
 const CommentSection = ({ reviewId }) => {
-	const { token, user } = useContext(StoreContext);
+	const { token, user, apiUrl } = useContext(StoreContext);
 	const [comments, setComments] = useState([]);
 	const [newComment, setNewComment] = useState("");
 	const [formVisible, setFormVisible] = useState(false);
@@ -15,21 +15,21 @@ const CommentSection = ({ reviewId }) => {
 	useEffect(() => {
 		const fetchComments = async () => {
 			try {
-				const res = await axios.get(`http://localhost:2000/review/${reviewId}/comments`);
+				const res = await axios.get(`${apiUrl}/review/${reviewId}/comments`);
 				setComments(res.data.comments);
 			} catch (err) {
 				console.error("Failed to fetch comments", err);
 			}
 		};
 		fetchComments();
-	}, [reviewId]);
+	}, [reviewId, apiUrl]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (!newComment.trim()) return;
 		try {
 			const res = await axios.post(
-				`http://localhost:2000/review/${reviewId}/comments`,
+				`${apiUrl}/review/${reviewId}/comments`,
 				{ content: newComment },
 				{ headers: { Authorization: `Bearer ${token}` } }
 			);
@@ -53,7 +53,7 @@ const CommentSection = ({ reviewId }) => {
 
 	const handleDelete = async (commentId) => {
 		try {
-			await axios.delete(`http://localhost:2000/review/${reviewId}/comments/${commentId}`, {
+			await axios.delete(`${apiUrl}/review/${reviewId}/comments/${commentId}`, {
 				headers: { Authorization: `Bearer ${token}` },
 			});
 			setComments(comments.filter((c) => c._id !== commentId));
@@ -72,7 +72,7 @@ const CommentSection = ({ reviewId }) => {
 	const handleSaveEdit = async (commentId) => {
 		try {
 			const res = await axios.put(
-				`http://localhost:2000/review/${reviewId}/comments/${commentId}`,
+				`${apiUrl}/review/${reviewId}/comments/${commentId}`,
 				{ content: editContent },
 				{ headers: { Authorization: `Bearer ${token}` } }
 			);
@@ -101,7 +101,6 @@ const CommentSection = ({ reviewId }) => {
 							<div className="author">
 								@{c.username || (user && c.userId === user.id ? user.name : "Anonymous")}
 							</div>
-
 
 							{editingCommentId === c._id ? (
 								<>
