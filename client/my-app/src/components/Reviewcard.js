@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import "./Reviewcard.css";
 import locationIcon from "../icons/619.png";
+import { StoreContext } from "../StoreContext";
 
 const Reviewcard = ({
   id,
