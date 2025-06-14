@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import Reviewcard from "./Reviewcard";
 import "./Search.css"; // Ensure this CSS file exists and is linked
-
+import { StoreContext } from "../StoreContext";
 const Search = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [isSearching, setIsSearching] = useState(false);
-
+  const { apiUrl } = useContext(StoreContext);
     // Pagination states
     const [currentPage, setCurrentPage] = useState(1);
     const [reviewsPerPage] = useState(12); // Display 12 reviews per page (4 columns * 3 rows)
@@ -24,7 +24,7 @@ const Search = () => {
             setIsSearching(false);
             setCurrentPage(1); // Reset to first page on new fetch
 
-            const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/review`);
+            const res = await fetch(`${apiurl}/review`);
             const data = await res.json();
 
             if (data.success) {
@@ -52,7 +52,7 @@ const Search = () => {
             setCurrentPage(1); // Reset to first page on new search
 
             const res = await fetch(
-                `${process.env.REACT_APP_API_BASE_URL}/review/search?query=${encodeURIComponent(query)}`
+                `${apiUrl}/review/search?query=${encodeURIComponent(query)}`
             );
             const data = await res.json();
 
