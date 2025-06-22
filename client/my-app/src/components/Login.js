@@ -131,9 +131,14 @@ const Login = ({ setshowLogin }) => {
 
             <div className="google-login-container">
               <GoogleLogin
-                onSuccess={googleSuccess}
-                onError={googleFailure}
-              />
+  onSuccess={googleSuccess}
+  onError={googleFailure}
+  useOneTap={false}
+  theme="outline"
+  size="large"
+  text="signin_with"
+  shape="rectangular"
+/>
             </div>
 
             <div className="terms-container">
