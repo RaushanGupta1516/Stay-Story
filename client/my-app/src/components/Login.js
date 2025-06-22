@@ -133,7 +133,6 @@ const Login = ({ setshowLogin }) => {
               <GoogleLogin
                 onSuccess={googleSuccess}
                 onError={googleFailure}
-                  width="100%"
               />
             </div>
 
