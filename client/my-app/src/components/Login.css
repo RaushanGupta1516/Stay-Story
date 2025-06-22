@@ -114,6 +114,18 @@
   width: 100%;
 }
 
+.google-login-container {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.google-login-container > div {
+  width: 100% !important;
+}
+
+
 /* Terms and Policy */
 .terms-container {
   display: flex;
