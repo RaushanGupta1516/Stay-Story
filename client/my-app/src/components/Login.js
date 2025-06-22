@@ -134,10 +134,6 @@ const Login = ({ setshowLogin }) => {
   onSuccess={googleSuccess}
   onError={googleFailure}
   useOneTap={false}
-  theme="outline"
-  size="large"
-  text="signin_with"
-  shape="rectangular"
 />
             </div>
 
