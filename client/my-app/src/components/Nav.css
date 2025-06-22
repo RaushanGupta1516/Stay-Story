@@ -1,0 +1,289 @@
+/* Base navbar layout */
+.navbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 60px;
+  z-index: 8000;
+  padding: 12px 20px;
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(255, 213, 0, 0.6);
+  flex-wrap: wrap;
+}
+
+.logo-icon {
+  height: 50px;
+  width: 150px;
+  margin-right: 10px;
+}
+
+#logo {
+  height: 180px;
+  margin-top: -50px;
+}
+
+/* Center nav buttons */
+.centernav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.centernav button {
+  background: none;
+  border: none;
+  color: #e2e8f0;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.centernav button:hover {
+  color: #60a5fa;
+}
+
+/* Right side (Post Review, Signup, etc.) */
+.reviewloginbox {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-right: 50px;
+}
+
+.reviewloginbox button,
+.my-reviews-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+#userName {
+  color: #f8fafc;
+  margin-top: 15px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Hamburger Icon */
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger img {
+  height: 30px;
+  margin-right: 20px;
+  margin-top: 10px;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  position: fixed;
+  top: 70px;
+  right: 0;
+  width: 40%;
+  background-color: #1e293b;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 4px;
+  z-index: 1000;
+  transform: translateX(0%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.mobile-menu a,
+.mobile-menu button {
+  padding: 10px 0;
+  color: #f8fafc;
+  text-decoration: none;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+}
+
+.mobile-menu a:hover,
+.mobile-menu button:hover {
+  color: #60a5fa;
+  background: #334155;
+}
+
+.mobile-menu #userName {
+  font-size: 15px;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: #10b981 2px solid;
+  padding-bottom: 8px;
+  color: #e2e8f0;
+  margin-bottom: 8px;
+}
+
+/* Hide mobile menu in desktop view */
+@media screen and (min-width: 769px) {
+  .mobile-menu {
+    display: none !important;
+  }
+}
+
+/* Logout button styling */
+#outbtn {
+  color: white;
+  background-color: #d42c2cee;
+  margin-top: 8px;
+  padding: 8px 20px;
+  border: none;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 10px;
+  width: fit-content;
+}
+
+#signbtn {
+  color: white;
+  background-color: #10b981;
+  margin-top: 8px;
+  padding: 10px 20px;
+  border: none;
+  font-weight: bold;
+  font-size: 14px;
+  width: fit-content;
+}
+
+#signbtn:hover {
+  background-color: #059669;
+}
+
+/* User greeting dropdown in desktop */
+.userbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-greeting {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #f1f5f9;
+  font-weight: 600;
+}
+
+.arrow {
+  font-size: 18px;
+  margin-top: 15px;
+}
+
+/* Desktop dropdown (My Reviews + Logout only) */
+.user-dropdown {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background-color: #1e293b;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  display: none;
+  flex-direction: column;
+  min-width: 150px;
+  padding: 10px;
+  z-index: 1001;
+}
+
+.user-dropdown a,
+.user-dropdown button {
+  padding: 8px 10px;
+  color: #f1f5f9;
+  text-align: left;
+  border: none;
+  background: none;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.user-dropdown a:hover,
+.user-dropdown button:hover {
+  background-color: #334155;
+  border-radius: 6px;
+}
+
+.user-dropdown.open {
+  display: flex;
+  margin-top: 10px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1024px) {
+  .logobox h2 {
+    font-size: 20px;
+  }
+
+  .centernav button,
+  .reviewloginbox button {
+    font-size: 14px;
+  }
+
+  .reviewloginbox {
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbox {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 15px;
+  }
+
+  .centernav,
+  .reviewloginbox {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  #userName {
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .logobox h2 {
+    font-size: 18px;
+  }
+
+  .mobile-menu a,
+  .mobile-menu button {
+    font-size: 14px;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
