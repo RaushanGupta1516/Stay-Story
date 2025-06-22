@@ -130,16 +130,19 @@ const Login = ({ setshowLogin }) => {
             </button>
 
             <div className="google-login-container">
-              <GoogleLogin
-  onSuccess={googleSuccess}
-  onError={googleFailure}
-  useOneTap={false}
-  ux_mode="popup"
-  theme="outline"
-  size="large"
-  text="signin_with"
-  shape="rectangular"
-/>
+              <div style={{ width: '100%' }}>
+  <GoogleLogin
+    onSuccess={googleSuccess}
+    onError={googleFailure}
+    useOneTap={false}
+    ux_mode="popup"
+    theme="outline"
+    size="large"
+    text="signin_with"
+    shape="rectangular"
+    width="100%"  // Optional: some versions support this prop
+  />
+</div>
             </div>
 
             <div className="terms-container">
