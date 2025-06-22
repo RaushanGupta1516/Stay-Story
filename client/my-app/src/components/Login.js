@@ -46,6 +46,9 @@ const Login = ({ setshowLogin }) => {
 
         setshowLogin(false);
         toast.success("Logged in successfully", { autoClose: 1500 });
+         setTimeout(() => {
+          window.location.reload();
+          }, 1600);
       } else {
         toast.error(res.data.message || "Signup/Login failed", { autoClose: 1500 });
       }
