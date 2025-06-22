@@ -98,8 +98,9 @@ const Nav = ({ setshowLogin }) => {
         <div className="mobile-menu">
           {token && <p id="userName">Hi, {user.name}</p>}
           <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
-          <button onClick={scrollToFooter}>Contact</button>
+          <button  className="ddbtn" onClick={scrollToFooter}>Contact</button>
           <button
+             className="ddbtn"
             onClick={() => {
               setMenuOpen(false);
               navigate("/about");
@@ -108,7 +109,7 @@ const Nav = ({ setshowLogin }) => {
           >
             About Us
           </button>
-          <Link to="/post-review" onClick={() => setMenuOpen(false)}>Post Review</Link>
+          <Link to="/post-review"  className="ddbtn" onClick={() => setMenuOpen(false)}>Post Review</Link>
 
           {token ? (
             <>
