@@ -80,7 +80,7 @@ const Footer = () => {
             <div className="footer-divider"></div>
 
             <p className="footer-copyright">
-                 © {new Date().getFullYear()}<strong>StayStory</strong>. Made with ❤️ by students, for students.All rights reserved.
+                 © {new Date().getFullYear()}<strong>StayStory</strong>. Made with ❤️ by students, for students. All Rights Reserved.
             </p>
         </footer>
     );
