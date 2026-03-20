@@ -4,7 +4,6 @@
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Online-brightgreen)](https://stay-story-client.onrender.com)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Source%20Code-blue)](https://github.com/RaushanGupta1516/Stay-Story)
-[![License](https://img.shields.io/badge/License-MIT-yellow)](./LICENSE)
 
 ---
 
@@ -428,10 +427,6 @@ git push origin feature/your-feature-name
 - Search is basic string matching — not fuzzy or typo-tolerant
 
 ---
-
-## 📄 License & Credits
-
-This project is licensed under the **MIT License** — see [LICENSE](./LICENSE) for full terms.
 
 ### Built With
 - [React.js](https://reactjs.org)
